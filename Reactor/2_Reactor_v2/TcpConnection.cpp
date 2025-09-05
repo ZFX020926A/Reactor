@@ -64,3 +64,39 @@ InetAddress TcpConnection::getpeeraddr()
     }
     return InetAddress(sockaddrin);
 }
+
+void TcpConnection::setcallback(TcpConnectionCallback cb1,
+                                TcpConnectionCallback cb2,
+                                TcpConnectionCallback cb3)
+    {
+        _onconnection = cb1;
+        _onmessage = cb2;
+        _onclose = cb3;
+    }
+
+void TcpConnection::handlenewconnectionCallback()
+{
+    if(_onconnection)
+    {
+        _onconnection(shared_from_this());
+    }
+
+}
+
+void TcpConnection::handlemessageCallback()
+{
+    if(_onmessage)
+    {
+        _onmessage(shared_from_this());
+    }
+
+}
+
+void TcpConnection::handlecloseCallback()
+{
+    if(_onclose)
+    {
+        _onclose(shared_from_this());
+    }
+
+}

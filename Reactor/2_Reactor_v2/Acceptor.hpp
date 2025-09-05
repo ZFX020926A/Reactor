@@ -16,6 +16,7 @@ public:
     ~Acceptor();
     void setready();
     int setaccept();
+    int getacceptfd();
 private:
     void setreuseraddr(bool boo);
     void setreuserport(bool boo);
